@@ -1,0 +1,141 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <script src="{%static 'test3.js'%}"></script>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="newtest.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> {% endcomment %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       
+    </head>
+    <body>
+        <style>
+            #cont{
+                background-color:#f9e7de;
+                border-radius: 25px; 
+               
+            }
+            .container-fluid{
+
+              background-color:#f2f2f2;
+            }
+        </style>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <div class='bses_icon'>  <img src="https://www.bsesdelhi.com/image/layout_set_logo?img_id=91257&t=1690795118097"></div>
+              <!-- <form class="d-flex" role="search"> -->
+                <div class ='emp_label'><label for="emp_name">Emp Name:</label></div>
+                <input class="form-control me-2" type="text" id="usernameInput" name="empnameone" value="{{ username }}">
+              <!-- </form> -->
+            </div>
+          </nav>
+          <h3><div class="d-flex justify-content-center">ISSUE REGISTRATION</div></h3>
+          
+        <div class="container cont" id="cont">
+          
+          <form method="post" action="{% url 'upload_form' %}" enctype="multipart/form-data" class="row g-3" style = "margin: 100px">
+            <div class="col-md-3">
+                <label for="Circle" class="form-label">Circle</label>
+                <select id="circle_dropdown" name="circleId" class="form-select">
+                    <option value=''>--SELECT CIRCLE--</option>
+                    {% for item in data%}
+                    <option value="{{item.CIRCLEID}}">{{item.CIRCLENAME}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+            <div class="col-md-3">
+              <label for="hostedby" class="form-label">Meeting Hosted By: </label>
+              <input type="text" class="form-control"name="meetingHost" placeholder="--NAME OF THE HOST--" id="host_id">
+            </div>
+            <div class="col-md-3">
+                <label for="subdivision_dropdown" class="form-label">Sub Division</label><br>
+                <select id="subdivision_dropdown"name="subDivision" class="form-select">
+                    <option value="">--SELECT SUBDIVISION--</option>
+                </select>
+              </div></br>
+              <div class="col-md-3">
+                <label for="inputEmail4" class="form-label">Meeting Attended By: </label>
+                <input type="text" class="form-control"name="meetingAttendees" placeholder="--NAME OF THE ATTENDEE--" id="attended_id">
+              </div>
+              <div class="col-md-3">
+                <label for="division_dropdown" class="form-label">Division</label><br>
+                <select id="division_dropdown"name="divisionId" class="form-select">
+                    <option value=''>--SELECT DIVISION--</option>
+                </select>
+              </div></br>
+              <div class="col-md-3">
+                <label for="inputState" class="form-label">Types of Issues</label>
+                <select id="issuetype_id"name="issueType" class="form-select">
+                    <option value="">--SELECT AN ISSUE--</option>
+                    {% for item in issues_type%}
+                        <option value="{{item.ISSUE_NAME}}">{{item.ISSUE_NAME}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="inputState" class="form-label">Issues Raised by:</label>
+                <select id="issueraised_id"name="issueRaisedBy" class="form-select">
+                    <option value="">--SELECT AN OPTION--</option>
+                    {% for item in issues_raised%}
+                        <option value="{{item.ISSUE_RAISED_NAME}}">{{item.ISSUE_RAISED_NAME}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="Description" class="form-label">Description: </label>
+                <input type="" class="form-control" placeholder="--DESCRIPTION--"name="description" id="description_id">
+              </div>
+            <div class="col-4">
+              <label for="View" class="form-label">BRPL-View</label>
+              <input type="text" class="form-control" id="brplview_id"name="brplView" placeholder="--BRPL VIEWS--">
+            </div>
+            <div class="col-4">
+              <label for="Councelor" class="form-label">Councelor</label>
+              <input type="text" class="form-control"name="counselor" placeholder="--COUNCELOR--" id="councelor_id" >
+            </div>
+            <div class="col-4">
+                <label for="Actionplan" class="form-label">Action Plan</label>
+                <input type="text" class="form-control" placeholder="--ACTION PLAN--"name="actionplan" id="actionplan_id">
+              </div>
+            <div class="col-md-4">
+              <label for="WardNumber" class="form-label">Ward Number</label>
+              <input type="text" class="form-control"name="wardNo" placeholder="--WARD NUMBER--" id="ward_id">
+            </div>
+            <div class="col-md-4">
+                <label for="WardNumber" class="form-label">Traget Date</label>
+                <input type="date" class="form-control" placeholder="--TARGET DATE--" name="targetDate" id="dateInput">
+              </div>
+            <div class="col-md-4">
+                <label for="MeetingDate" class="form-label">Meeting Date</label>
+                <input type="date" class="form-control"name="meetingDate" placeholder="--MEETING DATE--" id="meetingdate_id">
+              </div>
+              <div class="col-mb-3">
+                <label for="formFile" class="form-label">Attachment:</label>
+                <input class="form-control" type="file" name="file" id="file_id">
+              </div>
+            {% csrf_token %}
+              <div class="d-grid gap-2 col-6 mx-auto" style = "margin: 5px;">
+                <button class="btn btn-danger" id="submitBtn" type="submit">Submit</button>
+              </div>
+        </form>
+        </div>
+        <!-- Bootstrap Toast Container -->
+<!-- <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+  <div id="submission-toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+          <strong class="mr-auto">Submission Status</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+          Submitted Successfully!
+      </div>
+  </div>
+</div> -->
+    </body>
+</html>
